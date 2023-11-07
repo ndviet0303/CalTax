@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1699290653 source:e:\workspace\win\c++\taxapp\caltax\main.cpp
+	<iostream>
+	<list>
+	<iomanip>
+
