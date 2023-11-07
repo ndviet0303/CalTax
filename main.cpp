@@ -22,7 +22,7 @@ const float HANMUC[7] = {
     0.2,
     0.25,
     0.3,
-    0.5
+    0.35
 };
 void ThietLapHanMuc();
 void NhapThongTin();
