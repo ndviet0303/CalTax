@@ -171,7 +171,7 @@ void TinhThue() {
 }
 
 void QuyetToan(){
-    if(taxData.size <= 0)
+    if(taxData.size() <= 0)
     {
         cout << "chua co du lieu";
         return;
