@@ -15,7 +15,7 @@ struct TaxData {
     double income;
 };
 
-const float HANMUC[7] = {
+float hanMuc[7] = {
     0.05,
     0.1,
     0.15,
@@ -24,11 +24,20 @@ const float HANMUC[7] = {
     0.3,
     0.35
 };
+int hanMucThue[7][2] = {
+    {5, 60},
+    {10, 120},
+    {18, 216},
+    {32, 384},
+    {52, 624},
+    {80, 960}
+};
 
 void ThietLapHanMuc();
 void NhapThongTin();
 void TinhThue();
 void QuyetToan();
+void ThietLapPhanTramThue();
 
 double CalTax(double income);
 double CalTaxYear(double income);
@@ -46,9 +55,10 @@ int main() {
     while (true) {
         cout << "------------------- Menu -------------------" << endl;
         cout << "1. Thiet lap han muc mien tru" << endl;
-        cout << "2. Nhap thong tin" << endl;
-        cout << "3. Tinh thue thu nhap ca nhan" << endl;
-        cout << "4. Quyet toan thue thu nhap ca nhan" << endl;
+        cout << "2. Thiet lap phan tram thue" << endl;
+        cout << "3. Nhap thong tin" << endl;
+        cout << "4. Tinh thue thu nhap ca nhan" << endl;
+        cout << "5. Quyet toan thue thu nhap ca nhan" << endl;
         cout << "0. Thoat chuong trinh" << endl;
         cout << "Moi nhap lua chon: ";
         cin >> select;
@@ -62,12 +72,15 @@ int main() {
                 ThietLapHanMuc();
                 break;
             case 2:
-                NhapThongTin();
+                ThietLapPhanTramThue();
                 break;
             case 3:
-                TinhThue();
+                NhapThongTin();
                 break;
             case 4:
+                TinhThue();
+                break;
+            case 5:
                 QuyetToan();
                 break;
             default:
@@ -86,6 +99,16 @@ void ThietLapHanMuc() {
     system("cls");
 }
 
+void ThietLapPhanTramThue(){
+    for(int i =0;i < sizeof(hanMuc);i++)
+    {
+        float hamMucTemp = 0;
+        cout << "Thay Doi Han muc " << hanMucThue[i][0] << "trieu/thang va " << hanMucThue[i][1] << "trieu/nam la:" << hanMuc[i] * 100.0  << "% Sang:";
+        cin >> hamMucTemp;
+        hanMuc[i] = hamMucTemp / 100.0;
+    }
+    system("cls");
+}
 void NhapThongTin() {
     cout << "nhap ten:";
     cin.ignore();
@@ -168,19 +191,19 @@ double CalTaxYear(double income) {
     if (income <= 0) {
         tempIncome = 0.0;
     } else if (income <= 60) {
-        tempIncome = income * HANMUC[0];
+        tempIncome = income * hanMuc[0];
     } else if (income <= 120) {
-        tempIncome = (income - 60) * HANMUC[1] + 3;
+        tempIncome = (income - 60) * hanMuc[1] + 3;
     } else if (income <= 216) {
-        tempIncome = (income - 120) * HANMUC[2] + 9;
+        tempIncome = (income - 120) * hanMuc[2] + 9;
     } else if (income <= 384) {
-        tempIncome = (income - 216) * HANMUC[3] + 23.4;
+        tempIncome = (income - 216) * hanMuc[3] + 23.4;
     } else if (income <= 624) {
-        tempIncome = (income - 384) * HANMUC[4] + 57;
+        tempIncome = (income - 384) * hanMuc[4] + 57;
     } else if (income <= 960) {
-        tempIncome = (income - 624) * HANMUC[5] + 117;
+        tempIncome = (income - 624) * hanMuc[5] + 117;
     } else {
-        tempIncome = (income - 960) * HANMUC[6] + 217.8;
+        tempIncome = (income - 960) * hanMuc[6] + 217.8;
     }
 
     return tempIncome;
@@ -194,19 +217,19 @@ double CalTax(double income) {
     if (income <= 0) {
         tempIncome = 0.0;
     } else if (income <= 5) {
-        tempIncome = income * HANMUC[0];
+        tempIncome = income * hanMuc[0];
     } else if (income <= 10) {
-        tempIncome = (income - 5) * HANMUC[1] + 0.25;
+        tempIncome = (income - 5) * hanMuc[1] + 0.25;
     } else if (income <= 18) {
-        tempIncome = (income - 10) * HANMUC[2] + 0.75;
+        tempIncome = (income - 10) * hanMuc[2] + 0.75;
     } else if (income <= 32) {
-        tempIncome = (income - 18) * HANMUC[3] + 1.95;
+        tempIncome = (income - 18) * hanMuc[3] + 1.95;
     } else if (income <= 52) {
-        tempIncome = (income - 32) * HANMUC[4] + 4.75;
+        tempIncome = (income - 32) * hanMuc[4] + 4.75;
     } else if (income <= 80) {
-        tempIncome = (income - 52) * HANMUC[5] + 9.75;
+        tempIncome = (income - 52) * hanMuc[5] + 9.75;
     } else {
-        tempIncome = (income - 80) * HANMUC[6] + 18.15;
+        tempIncome = (income - 80) * hanMuc[6] + 18.15;
     }
 
     return tempIncome;
