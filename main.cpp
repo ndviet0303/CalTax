@@ -84,7 +84,7 @@ int main() {
                 QuyetToan();
                 break;
             default:
-                cout << "Vui long nhap trong khoang (0 - 4)" << endl;
+                cout << "Vui long nhap trong khoang (0 - 5)" << endl;
         }
     }
 
