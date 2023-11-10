@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include <iomanip>
+
 using namespace std;
 
 struct UserData {
@@ -138,9 +139,14 @@ void TinhThue() {
         cin >> tax.income;
         tax.taxPaid = CalTax(tax.income);
 
-        cout << "Thue cua " << tax.name << " la: " << tax.taxPaid << " trieu\n";
+        cout << "Thue cua thang " << tax.name << " la: " << tax.taxPaid << " trieu\n";
 
         taxData.push_back(tax);
+
+        cout << "bam enter de tiep tuc";
+        cin.ignore();
+        cin.get();
+
     } else {
         cout << "Ban da nhap du 12 thang" << endl;
         return;
@@ -155,9 +161,9 @@ void QuyetToan() {
     }
     cout << "Don vi: Trieu Dong\n";
     int stt = 1;
-    double totalIncome, totalTaxPaid = 0;
+    double totalIncome = 0, totalTaxPaid = 0;
     cout << left << setw(4) << "STT" << " | ";
-    cout << left << setw(20) << "Ten" << " | ";
+    cout << left << setw(20) << "Thang" << " | ";
     cout << left << setw(10) << "Thue" << " | ";
     cout << left << setw(15) << "Thu Nhap" << endl;
 
@@ -180,7 +186,7 @@ void QuyetToan() {
     double dTaxPaid = CalTaxYear(totalIncome);
     cout << "Thue thuc te la: " << CalTaxYear(totalIncome) << endl;
     double dRealPaid = dTaxPaid - totalTaxPaid;
-    cout << "Thue: " << (dRealPaid > 0 ? "duong => phai nop them" : "am => duoc nhan lai") << endl;
+    cout << "Thue: " <<  dRealPaid << (dRealPaid > 0 ?  " => duong => phai nop them" : "=> am => duoc nhan lai") << endl;
 }
 
 double CalTaxYear(double income) {
