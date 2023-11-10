@@ -129,7 +129,26 @@ void NhapThongTin() {
 void TinhThue() {
     if (taxData.size() < 12) {
         system("cls");
+        if(taxData.size() > 0)
+        {
+            cout << "Du lieu da nhap truoc do" << endl;
+            int stt = 1;
+            cout << left << setw(4) << "STT" << " | ";
+            cout << left << setw(20) << "Thang" << " | ";
+            cout << left << setw(10) << "Thue" << " | ";
+            cout << left << setw(15) << "Thu Nhap" << endl;
 
+            cout << string(51, '-') << endl;
+
+            for (TaxData tax : taxData) {
+                cout << left << setw(4) << stt << " | ";
+                cout << left << setw(20) << tax.name << " | ";
+                cout << left << setw(10) << tax.taxPaid << " | ";
+                cout << left << setw(15) << tax.income << endl;
+                stt++;
+            }
+            cout << string(51, '-') << endl;
+        }
         TaxData tax;
         cout << "Nhap thang: ";
         cin.ignore();
