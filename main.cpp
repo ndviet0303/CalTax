@@ -186,7 +186,7 @@ void QuyetToan() {
     double dTaxPaid = CalTaxYear(totalIncome);
     cout << "Thue thuc te la: " << CalTaxYear(totalIncome) << endl;
     double dRealPaid = dTaxPaid - totalTaxPaid;
-    cout << "Thue: " <<  dRealPaid << (dRealPaid > 0 ?  " => duong => phai nop them" : "=> am => duoc nhan lai") << endl;
+    cout << "Thue: " <<  dRealPaid << (dRealPaid > 0 ?  " => phai nop them" : " => duoc nhan lai") << endl;
 }
 
 double CalTaxYear(double income) {
