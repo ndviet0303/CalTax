@@ -11,7 +11,7 @@ struct UserData {
 };
 
 struct TaxData {
-    string name;
+    int name;
     double taxPaid;
     double income;
 };
@@ -86,6 +86,7 @@ int main() {
                 break;
             default:
                 cout << "Vui long nhap trong khoang (0 - 5)" << endl;
+                break;
         }
     }
 
@@ -101,12 +102,21 @@ void ThietLapHanMuc() {
 }
 
 void ThietLapPhanTramThue(){
-    for(int i =0;i < sizeof(hanMuc);i++)
+    for(int i =0;i < sizeof(hanMuc) / sizeof(hanMuc[0]);i++)
     {
-        float hamMucTemp = 0;
+         float hamMucTemp = 0;
+        if(i == (sizeof(hanMuc) / sizeof(hanMuc[0]) - 1))
+        {
+            cout << "Thay Doi Han muc > " << hanMucThue[i - 1][0] << "trieu/thang va >" << hanMucThue[i -1][1] << "trieu/nam la:" << hanMuc[i] * 100.0  << "% Sang:";
+            cin >> hamMucTemp;
+            hanMuc[i] = hamMucTemp / 100.0;
+        }
+        else{
         cout << "Thay Doi Han muc " << hanMucThue[i][0] << "trieu/thang va " << hanMucThue[i][1] << "trieu/nam la:" << hanMuc[i] * 100.0  << "% Sang:";
         cin >> hamMucTemp;
         hanMuc[i] = hamMucTemp / 100.0;
+
+        }
     }
     system("cls");
 }
@@ -151,8 +161,20 @@ void TinhThue() {
         }
         TaxData tax;
         cout << "Nhap thang: ";
-        cin.ignore();
-        getline(cin, tax.name);
+        cin >> tax.name;
+        if(tax.name <= 0 || tax.name > 12)
+        {
+            cout << "Nhap trong khoang 1 - 12";
+            return;
+        }
+
+         for (TaxData taxF : taxData) {
+                if(taxF.name == tax.name)
+                {
+                    cout << "Thang nay da duoc nhap";
+                    return;
+                }
+        }
 
         cout << "Nhap thu nhap thang nay (trieu): ";
         cin >> tax.income;
