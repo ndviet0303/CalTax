@@ -164,14 +164,20 @@ void TinhThue() {
         cin >> tax.name;
         if(tax.name <= 0 || tax.name > 12)
         {
-            cout << "Nhap trong khoang 1 - 12";
+            cout << "Nhap trong khoang 1 - 12" << endl;
+            cout << "bam enter de tiep tuc";
+            cin.ignore();
+            cin.get();
             return;
         }
 
          for (TaxData taxF : taxData) {
                 if(taxF.name == tax.name)
                 {
-                    cout << "Thang nay da duoc nhap";
+                    cout << "Thang nay da duoc nhap" << endl;
+                    cout << "bam enter de tiep tuc";
+                    cin.ignore();
+                    cin.get();
                     return;
                 }
         }
