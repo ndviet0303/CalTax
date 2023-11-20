@@ -96,7 +96,7 @@ int main() {
 void ThietLapHanMuc() {
     cout << "nhap han muc ban muon(trieu):";
     cin >> workerExemption;
-    cout << "nhap han muc ban muon(trieu):";
+    cout << "nhap so nguoi phu thuoc:";
     cin >> dependentExemption;
     system("cls");
 }
