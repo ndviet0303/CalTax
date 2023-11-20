@@ -210,8 +210,8 @@ void QuyetToan() {
         return;
     }
     cout << "-Thong tin-" << endl;
-        cout << "Han muc mien tru: " << workerExemption;
-        cout << "So nguoi phu thuoc: " << dependentExemption;
+    cout << "Han muc mien tru: " << workerExemption;
+    cout << "So nguoi phu thuoc: " << dependentExemption;
     cout << "Don vi: Trieu Dong\n";
     int stt = 1;
     double totalIncome = 0, totalTaxPaid = 0;
