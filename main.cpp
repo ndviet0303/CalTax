@@ -1,7 +1,7 @@
 #include <iostream>
 #include <list>
 #include <iomanip>
-
+#include <cmath>
 using namespace std;
 
 struct UserData {
@@ -16,6 +16,7 @@ struct TaxData {
     double income;
 };
 
+//Han muc thue thu nhap theo thang.
 float hanMuc[7] = {
     0.05,
     0.1,
@@ -25,6 +26,7 @@ float hanMuc[7] = {
     0.3,
     0.35
 };
+//Han muc thue thu nhap theo nam.
 int hanMucThue[7][2] = {
     {5, 60},
     {10, 120},
@@ -46,7 +48,7 @@ double CalTaxYear(double income);
 // Han Muc
 float workerExemption = 11, dependentExemption = 4.4;
 
-// User data
+// User Data
 UserData user;
 list<TaxData> taxData;
 
@@ -55,12 +57,12 @@ int main() {
 
     while (true) {
         cout << "------------------- Menu -------------------" << endl;
-        cout << "1. Thiet lap han muc mien tru" << endl;
-        cout << "2. Thiet lap phan tram thue" << endl;
-        cout << "3. Nhap thong tin" << endl;
-        cout << "4. Tinh thue thu nhap ca nhan" << endl;
-        cout << "5. Quyet toan thue thu nhap ca nhan" << endl;
-        cout << "0. Thoat chuong trinh" << endl;
+        cout << " 1. Thiet lap han muc mien tru" << endl;
+        cout << " 2. Thiet lap phan tram thue" << endl;
+        cout << " 3. Nhap thong tin" << endl;
+        cout << " 4. Tinh thue thu nhap ca nhan" << endl;
+        cout << " 5. Quyet toan thue ca nam" << endl;
+        cout << " 0. Thoat chuong trinh" << endl;
         cout << "Moi nhap lua chon: ";
         cin >> select;
 
@@ -94,11 +96,16 @@ int main() {
 }
 
 void ThietLapHanMuc() {
-    cout << "nhap han muc ban muon(trieu):";
+    do {
+	cout << "Nhap han muc ban muon (trieu): ";
     cin >> workerExemption;
-    cout << "nhap so nguoi phu thuoc:";
+    } while (workerExemption <= 0);
+
+    do {
+    cout << "Nhap han muc doi voi moi nguoi phu thuoc (trieu): ";
     cin >> dependentExemption;
     system("cls");
+    } while (dependentExemption <= 0);
 }
 
 void ThietLapPhanTramThue(){
@@ -107,31 +114,38 @@ void ThietLapPhanTramThue(){
          float hamMucTemp = 0;
         if(i == (sizeof(hanMuc) / sizeof(hanMuc[0]) - 1))
         {
-            cout << "Thay Doi Han muc > " << hanMucThue[i - 1][0] << "trieu/thang va >" << hanMucThue[i -1][1] << "trieu/nam la:" << hanMuc[i] * 100.0  << "% Sang:";
-            cin >> hamMucTemp;
+            cout << "Thay Doi Han Muc > " << hanMucThue[i - 1][0] << " trieu/thang va > " << hanMucThue[i -1][1] << " trieu/nam la " << hanMuc[i] * 100.0  << "% sang: ";
+            do {
+			cin >> hamMucTemp;
             hanMuc[i] = hamMucTemp / 100.0;
+            } while (hanMuctemp <= 0);
         }
         else{
-        cout << "Thay Doi Han muc " << hanMucThue[i][0] << "trieu/thang va " << hanMucThue[i][1] << "trieu/nam la:" << hanMuc[i] * 100.0  << "% Sang:";
-        cin >> hamMucTemp;
-        hanMuc[i] = hamMucTemp / 100.0;
-
+            cout << "Thay Doi Han Muc " << hanMucThue[i][0] << " trieu/thang va " << hanMucThue[i][1] << " trieu/nam la " << hanMuc[i] * 100.0  << "% sang: ";
+	        do {
+			cin >> hamMucTemp;
+	        hanMuc[i] = hamMucTemp / 100.0;
+		    } while (hanMucTemp <= 0);
         }
     }
     system("cls");
 }
 void NhapThongTin() {
-    cout << "nhap ten:";
+    cout << "Ho va ten: ";
     cin.ignore();
     getline(cin, user.name);
 
-    cout << "nhap nam tinh thue:";
+	do {
+    cout << "Nam tinh thue: ";
     cin >> user.year;
+    } while (user.year <= 0);
 
-    cout << "nhap so nguoi phu thuoc:";
+    do {
+    cout << "So nguoi phu thuoc: ";
     cin >> user.dependent;
+    } while (user.dependent <= 0);
 
-    cout << "da nhap thong tin thanh cong";
+    cout << "Da nhap thong tin thanh cong!";
     cout << "\n------------------------------------------\n";
     system("cls");
 }
@@ -139,25 +153,27 @@ void NhapThongTin() {
 void TinhThue() {
     if (taxData.size() < 12) {
         system("cls");
-        cout << "-Thong tin-" << endl;
-        cout << "Han muc mien tru: " << workerExemption;
-        cout << "So nguoi phu thuoc: " << dependentExemption;
+        cout << " -Thong tin-" << endl;
+        cout << "Ho va ten: " << user.name << endl;
+        cout << "So nguoi phu thuoc: " << user.dependent << endl;
+        cout << "Han muc mien tru gia canh: " << workerExemption << endl;
+        cout << "Han muc mien tru voi moi nguoi phu thuoc: " << dependentExemption << endl;
+        cout << "Don vi: trieu dong" << endl;
         if(taxData.size() > 0)
         {
-            cout << "Du lieu da nhap truoc do" << endl;
             int stt = 1;
-            cout << left << setw(4) << "STT" << " | ";
+            cout << left << setw(4) << " STT" << " | ";
             cout << left << setw(20) << "Thang" << " | ";
-            cout << left << setw(10) << "Thue" << " | ";
-            cout << left << setw(15) << "Thu Nhap" << endl;
+            cout << left << setw(10) << "Thu Nhap" << " | ";
+            cout << left << setw(10) << "Thue" << endl;
 
             cout << string(51, '-') << endl;
 
             for (TaxData tax : taxData) {
                 cout << left << setw(4) << stt << " | ";
                 cout << left << setw(20) << tax.name << " | ";
-                cout << left << setw(10) << tax.taxPaid << " | ";
-                cout << left << setw(15) << tax.income << endl;
+                cout << left << setw(10) << tax.income << " | ";
+                cout << left << setw(10) << tax.taxPaid << endl;
                 stt++;
             }
             cout << string(51, '-') << endl;
@@ -167,8 +183,8 @@ void TinhThue() {
         cin >> tax.name;
         if(tax.name <= 0 || tax.name > 12)
         {
-            cout << "Nhap trong khoang 1 - 12" << endl;
-            cout << "bam enter de tiep tuc";
+            cout << "Nhap trong khoang 1 - 12." << endl;
+            cout << "Bam enter de tiep tuc.";
             cin.ignore();
             cin.get();
             return;
@@ -177,8 +193,8 @@ void TinhThue() {
          for (TaxData taxF : taxData) {
                 if(taxF.name == tax.name)
                 {
-                    cout << "Thang nay da duoc nhap" << endl;
-                    cout << "bam enter de tiep tuc";
+                    cout << "Thang nay da duoc nhap." << endl;
+                    cout << "Bam enter de tiep tuc.";
                     cin.ignore();
                     cin.get();
                     return;
@@ -193,12 +209,12 @@ void TinhThue() {
 
         taxData.push_back(tax);
 
-        cout << "bam enter de tiep tuc";
+        cout << "Bam enter de tiep tuc.";
         cin.ignore();
         cin.get();
 
     } else {
-        cout << "Ban da nhap du 12 thang" << endl;
+        cout << "Ban da nhap du 12 thang." << endl;
         return;
     }
     system("cls");
@@ -206,40 +222,43 @@ void TinhThue() {
 
 void QuyetToan() {
     if (taxData.size() <= 0) {
-        cout << "chua co du lieu";
+        cout << "Chua co du lieu." << endl;
         return;
     }
-    cout << "-Thong tin-" << endl;
-    cout << "Han muc mien tru: " << workerExemption;
-    cout << "So nguoi phu thuoc: " << dependentExemption;
-    cout << "Don vi: Trieu Dong\n";
+    cout << " -Thong tin-" << endl;
+    cout << "Ho va ten: " << user.name << endl;
+    cout << "So nguoi phu thuoc: " << user.dependent << endl;
+    cout << "Han muc mien tru gia canh: " << workerExemption << endl;
+    cout << "Han muc mien tru voi moi nguoi phu thuoc: " << dependentExemption << endl;
+    cout << "Don vi: trieu dong" << endl;
     int stt = 1;
     double totalIncome = 0, totalTaxPaid = 0;
-    cout << left << setw(4) << "STT" << " | ";
+    cout << left << setw(4) << " STT" << " | ";
     cout << left << setw(20) << "Thang" << " | ";
-    cout << left << setw(10) << "Thue" << " | ";
-    cout << left << setw(15) << "Thu Nhap" << endl;
-
+    cout << left << setw(10) << "Thu Nhap" << " | ";
+    cout << left << setw(10) << "Thue" << endl;
     cout << string(51, '-') << endl;
 
     for (TaxData tax : taxData) {
         cout << left << setw(4) << stt << " | ";
         cout << left << setw(20) << tax.name << " | ";
-        cout << left << setw(10) << tax.taxPaid << " | ";
-        cout << left << setw(15) << tax.income << endl;
+        cout << left << setw(10) << tax.income << " | ";
+        cout << left << setw(10) << tax.taxPaid << endl;
         stt++;
         totalIncome += tax.income;
         totalTaxPaid += tax.taxPaid;
     }
     cout << string(51, '-') << endl;
-
+    cout << "Don vi: trieu dong" << endl;
     cout << "Tong thu nhap nam " << user.year << " la: " << totalIncome << endl;
-    cout << "Thu nhap tinh thue la: " << (totalIncome - 132) << endl;
-    cout << "Thue tam nop la: " << totalTaxPaid << endl;
+    cout << "Thu nhap tinh thue: " << (totalIncome - 132) << endl;
+    cout << "Thue tam nop: " << totalTaxPaid << endl;
     double dTaxPaid = CalTaxYear(totalIncome);
-    cout << "Thue thuc te la: " << CalTaxYear(totalIncome) << endl;
+    cout << "Thue thuc te: " << CalTaxYear(totalIncome) << endl;
     double dRealPaid = dTaxPaid - totalTaxPaid;
-    cout << "Thue: " <<  dRealPaid << (dRealPaid > 0 ?  " => phai nop them" : " => duoc nhan lai") << endl;
+    cout << "Thue: " <<  dRealPaid << endl;
+    double iGiaTriTuyetDoi = abs(dRealPaid);
+    (dRealPaid > 0 ? cout << "Ban phai nop them " << iGiaTriTuyetDoi << " trieu dong." : cout << "Ban duoc nhan lai " << iGiaTriTuyetDoi << " trieu dong." ) << endl;
 }
 
 double CalTaxYear(double income) {
