@@ -111,20 +111,20 @@ void ThietLapHanMuc() {
 void ThietLapPhanTramThue(){
     for(int i =0;i < sizeof(hanMuc) / sizeof(hanMuc[0]);i++)
     {
-         float hamMucTemp = 0;
+         float hanMucTemp = 0;
         if(i == (sizeof(hanMuc) / sizeof(hanMuc[0]) - 1))
         {
             cout << "Thay Doi Han Muc > " << hanMucThue[i - 1][0] << " trieu/thang va > " << hanMucThue[i -1][1] << " trieu/nam la " << hanMuc[i] * 100.0  << "% sang: ";
             do {
-			cin >> hamMucTemp;
-            hanMuc[i] = hamMucTemp / 100.0;
-            } while (hanMuctemp <= 0);
+			cin >> hanMucTemp;
+            hanMuc[i] = hanMucTemp / 100.0;
+            } while (hanMucTemp <= 0);
         }
         else{
             cout << "Thay Doi Han Muc " << hanMucThue[i][0] << " trieu/thang va " << hanMucThue[i][1] << " trieu/nam la " << hanMuc[i] * 100.0  << "% sang: ";
 	        do {
-			cin >> hamMucTemp;
-	        hanMuc[i] = hamMucTemp / 100.0;
+			cin >> hanMucTemp;
+	        hanMuc[i] = hanMucTemp / 100.0;
 		    } while (hanMucTemp <= 0);
         }
     }
